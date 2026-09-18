@@ -2749,53 +2749,35 @@ figure {
 }
 
 .style-h1 {
-  font-family: 'Plus Jakarta Sans', var(--_base---font-family--your-title-font), sans-serif;
+  font-family: 'Poppins', 'Plus Jakarta Sans', var(--_base---font-family--your-title-font), sans-serif;
   font-size: var(--h1--font-size);
   line-height: var(--h1--line-height);
   font-weight: 800;
   letter-spacing: -0.03em;
 }
 
-/* SplitText and Hero Heading Styling */
+/* SplitText and Hero Heading Styling (Matches GreenSock xxmaNYj) */
+.hero_heading-wrap {
+  text-align: center;
+  max-width: 820px;
+  overflow: hidden; /* Clean boundary for x: 150 character slide-in */
+}
+
 .hero_heading-wrap .style-h1 {
-  font-family: 'Plus Jakarta Sans', var(--_base---font-family--your-title-font), sans-serif;
-  font-weight: 800;
-  font-size: clamp(38px, 5.2vw, 68px);
-  line-height: 1.08;
-  letter-spacing: -0.035em;
+  font-family: 'Poppins', 'Plus Jakarta Sans', var(--_base---font-family--your-title-font), sans-serif;
+  font-weight: 700;
+  font-size: clamp(38px, 5vw, 64px);
+  line-height: 1.14;
+  letter-spacing: -0.02em;
   color: #FFFFFF;
   text-wrap: balance;
   margin-bottom: 0;
-  perspective: 1000px;
-}
-
-.hero_heading-wrap .hero-gradient-text {
-  color: #0080FF;
-  background: linear-gradient(135deg, #0080FF 0%, #00F0FF 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  display: inline;
-}
-
-.hero_heading-wrap .hero-gradient-text .char-anim {
-  background: inherit;
-  -webkit-background-clip: inherit;
-  -webkit-text-fill-color: inherit;
+  user-select: none;
+  cursor: pointer;
 }
 
 .hero-split-title {
-  visibility: hidden; /* Prevent FOUC before SplitText initializes */
-}
-
-.hero-split-title .char-anim {
-  display: inline-block;
-  will-change: transform, opacity;
-  backface-visibility: hidden;
-}
-
-.hero-split-title .word-anim {
-  display: inline-block;
-  white-space: nowrap;
+  visibility: hidden; /* Revealed seamlessly when SplitText initializes */
 }
 
 .text-medium {
