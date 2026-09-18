@@ -1,0 +1,19 @@
+# 1-year immutable caching for static assets
+/css/*
+  Cache-Control: public, max-age=31536000, immutable
+/js/*
+  Cache-Control: public, max-age=31536000, immutable
+/images/*
+  Cache-Control: public, max-age=31536000, immutable
+/reels/*
+  Cache-Control: public, max-age=31536000, immutable
+/LOGOS/*
+  Cache-Control: public, max-age=31536000, immutable
+/public/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# HTML documents (fresh, fast revalidation)
+/*.html
+  Cache-Control: public, max-age=3600, must-revalidate
+/
+  Cache-Control: public, max-age=3600, must-revalidate
