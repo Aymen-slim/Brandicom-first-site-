@@ -13,3 +13,6 @@ wrangler.toml
 package.json
 package-lock.json
 *.log
+reels/Not*.mp4
+reels/You*.mp4
+
