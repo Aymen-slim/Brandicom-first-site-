@@ -452,12 +452,12 @@
 }
 
 /* ==========================================================================
-   GREENSOCK dydpJzY HORIZONTAL SCROLLING GALLERY
+   AUTO-GLIDING & DRAGGABLE SEAMLESS HORIZONTAL GALLERY
    ========================================================================== */
 #portfolio.cucina-horiz-gallery-section {
   position: relative;
   overflow: hidden;
-  padding: 70px 0 80px;
+  padding: 60px 0 75px;
   background: #090a0f;
   width: 100%;
 }
@@ -465,7 +465,7 @@
 .cucina-gallery-header-container {
   width: 100%;
   max-width: 1200px;
-  margin: 0 auto 36px;
+  margin: 0 auto 32px;
   padding: 0 24px;
   box-sizing: border-box;
 }
@@ -487,16 +487,60 @@
   letter-spacing: -0.02em;
 }
 
+.cucina-gallery-subtitle {
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 14px;
+  margin: 4px 0 0;
+  line-height: 1.5;
+}
+
+.cucina-gallery-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cucina-nav-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: background 0.25s ease, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease;
+  padding: 0;
+}
+
+.cucina-nav-btn:hover {
+  background: rgba(255, 255, 255, 0.22);
+  border-color: rgba(255, 255, 255, 0.38);
+  transform: scale(1.08);
+}
+
+.cucina-nav-btn:active {
+  transform: scale(0.94);
+}
+
+.cucina-nav-btn svg {
+  pointer-events: none;
+}
+
 .cucina-gallery-scroll-hint {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  color: rgba(255, 255, 255, 0.75);
-  font-size: 13px;
-  font-weight: 500;
+  gap: 8px;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 12px;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.07em;
-  padding: 8px 18px;
+  letter-spacing: 0.08em;
+  padding: 8px 16px;
   border-radius: 9999px;
   background: rgba(255, 255, 255, 0.07);
   border: 1px solid rgba(255, 255, 255, 0.15);
@@ -504,14 +548,18 @@
   -webkit-backdrop-filter: blur(10px);
 }
 
-.cucina-gallery-scroll-hint svg {
-  stroke: #ff9900;
-  animation: hintArrowBounce 1.8s ease-in-out infinite;
+.live-pulse {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #ff9900;
+  box-shadow: 0 0 10px #ff9900;
+  animation: livePulseAnim 2s ease-in-out infinite;
 }
 
-@keyframes hintArrowBounce {
-  0%, 100% { transform: translateX(0); }
-  50% { transform: translateX(6px); }
+@keyframes livePulseAnim {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.75); }
 }
 
 .cucina-horiz-gallery-section .container-fluid {
@@ -525,10 +573,20 @@
 .horiz-gallery-wrapper {
   display: flex;
   flex-wrap: nowrap;
-  will-change: transform;
   position: relative;
   width: 100%;
   align-items: center;
+  overflow: hidden;
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: pan-y;
+  padding: 10px 0 20px;
+}
+
+.horiz-gallery-wrapper:active,
+.horiz-gallery-wrapper.is-dragging {
+  cursor: grabbing;
 }
 
 .horiz-gallery-strip {
@@ -537,13 +595,13 @@
   will-change: transform;
   position: relative;
   align-items: center;
-  padding-left: 4vw;
-  padding-right: 4vw;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .project-wrap {
   flex: 0 0 auto;
-  padding: 1.25rem;
+  padding: 0.75rem 1rem;
   box-sizing: border-box;
 }
 
@@ -551,7 +609,7 @@
 .project-wrap .cucina-card {
   height: 64vh;
   max-height: 680px;
-  min-height: 380px;
+  min-height: 360px;
   aspect-ratio: 1536 / 2302;
   border-radius: 20px;
   overflow: hidden;
@@ -578,6 +636,7 @@
   position: relative;
   display: block;
   background: #0d0e12;
+  pointer-events: none;
 }
 
 .project-wrap .cucina-card-img {
@@ -587,6 +646,7 @@
   object-fit: cover;
   display: block;
   transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
 }
 
 .project-wrap .cucina-card:hover .cucina-card-img {
@@ -595,15 +655,19 @@
 
 @media (max-width: 767px) {
   .project-wrap {
-    padding: 0.75rem;
+    padding: 0.5rem 0.65rem;
   }
   .project-wrap .cucina-card {
-    height: 56vh;
-    min-height: 320px;
+    height: 54vh;
+    min-height: 300px;
     border-radius: 16px;
   }
   .cucina-gallery-title {
-    font-size: 28px;
+    font-size: 26px;
+  }
+  .cucina-nav-btn {
+    width: 38px;
+    height: 38px;
   }
 }
 
@@ -862,7 +926,7 @@
     </div><!-- close container -->
   </section><!-- close section_detail top -->
 
-  <!-- GreenSock dydpJzY Horizontal Scrolling Gallery Section -->
+  <!-- Auto-Gliding & Draggable Horizontal Gallery Section -->
   <section id="portfolio" class="cucina-horiz-gallery-section">
     <div class="cucina-gallery-header-container" slide-up="">
       <div class="services_text-dot-wrap">
@@ -870,10 +934,21 @@
         <div class="text-size-regular">Culinary Gallery</div>
       </div>
       <div class="cucina-gallery-header-row">
-        <h2 class="cucina-gallery-title">Gastronomic Showcase</h2>
-        <div class="cucina-gallery-scroll-hint">
-          <span>Scroll to explore</span>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        <div>
+          <h2 class="cucina-gallery-title">Gastronomic Showcase</h2>
+          <p class="cucina-gallery-subtitle">Continuous live stream &bull; Drag or swipe to navigate</p>
+        </div>
+        <div class="cucina-gallery-controls">
+          <button class="cucina-nav-btn prev" aria-label="Previous dishes" title="Previous">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 19l-7-7 7-7"/></svg>
+          </button>
+          <button class="cucina-nav-btn next" aria-label="Next dishes" title="Next">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 5l7 7-7 7"/></svg>
+          </button>
+          <div class="cucina-gallery-scroll-hint">
+            <span class="live-pulse"></span>
+            <span>Drag &bull; Auto-gliding</span>
+          </div>
         </div>
       </div>
     </div>
@@ -1395,51 +1470,173 @@ document.addEventListener("DOMContentLoaded", () => {
 
 <script>
 window.addEventListener('DOMContentLoaded', () => {
-// Horizontal Scroll Galleries (GreenSock CodePen dydpJzY)
-if (typeof ScrollTrigger !== 'undefined' && typeof gsap !== 'undefined' && document.getElementById("portfolio")) {
-  const horizontalSections = gsap.utils.toArray(".horiz-gallery-wrapper");
+// Auto-Gliding & Draggable Seamless Horizontal Gallery
+(function initDraggableAutoGallery() {
+  const wrapper = document.querySelector('.horiz-gallery-wrapper');
+  const strip = document.querySelector('.horiz-gallery-strip');
+  if (!wrapper || !strip) return;
 
-  horizontalSections.forEach(function (sec, i) {
-    const pinWrap = sec.querySelector(".horiz-gallery-strip");
-
-    let pinWrapWidth;
-    let horizontalScrollLength;
-
-    function refresh() {
-      pinWrapWidth = pinWrap.scrollWidth;
-      horizontalScrollLength = pinWrapWidth - window.innerWidth;
-    }
-
-    refresh();
-
-    // Pinning and horizontal scrolling (scrubbed)
-    gsap.to(pinWrap, {
-      scrollTrigger: {
-        scrub: 1,
-        trigger: sec,
-        pin: sec,
-        start: "center center",
-        end: () => `+=${pinWrapWidth}`,
-        invalidateOnRefresh: true,
-        anticipatePin: 1
-      },
-      x: () => -horizontalScrollLength,
-      ease: "none"
-    });
-
-    ScrollTrigger.addEventListener("refreshInit", refresh);
+  // 1. Clone items to double the strip for seamless infinite wrapping
+  const originalItems = Array.from(strip.children);
+  originalItems.forEach(item => {
+    const clone = item.cloneNode(true);
+    clone.setAttribute('aria-hidden', 'true');
+    strip.appendChild(clone);
   });
 
-  // Sync Lenis with ScrollTrigger if active
-  if (typeof lenis !== 'undefined') {
-    lenis.on('scroll', ScrollTrigger.update);
+  let currentX = 0;
+  const autoVelocity = -1.1; // px per frame (auto-slides to the left)
+  let isDragging = false;
+  let isHovered = false;
+  let startX = 0;
+  let prevX = 0;
+  let userVelocity = 0;
+  let hasMoved = false;
+  let momentumTween = null;
+
+  function wrapX() {
+    const halfWidth = strip.scrollWidth / 2;
+    if (halfWidth > 0) {
+      while (currentX <= -halfWidth) {
+        currentX += halfWidth;
+      }
+      while (currentX > 0) {
+        currentX -= halfWidth;
+      }
+    }
   }
 
-  // Refresh calculations once images finish loading
-  window.addEventListener('load', () => {
-    ScrollTrigger.refresh();
+  // 2. Auto-glide ticker on GSAP
+  gsap.ticker.add((time, deltaTime) => {
+    if (!isDragging && (!momentumTween || !momentumTween.isActive())) {
+      const speed = isHovered ? autoVelocity * 0.25 : autoVelocity;
+      const step = speed * (deltaTime / 16.67);
+      currentX += step;
+      wrapX();
+      gsap.set(strip, { x: currentX });
+    }
   });
-}
+
+  // 3. Pointer Drag & Swipe (Mouse & Touch)
+  wrapper.addEventListener('pointerdown', (e) => {
+    if (e.button !== 0 && e.pointerType === 'mouse') return;
+    if (momentumTween) momentumTween.kill();
+    isDragging = true;
+    hasMoved = false;
+    startX = e.clientX;
+    prevX = e.clientX;
+    userVelocity = 0;
+    wrapper.classList.add('is-dragging');
+  });
+
+  window.addEventListener('pointermove', (e) => {
+    if (!isDragging) return;
+    const deltaX = e.clientX - prevX;
+    prevX = e.clientX;
+
+    if (Math.abs(e.clientX - startX) > 5) {
+      hasMoved = true;
+    }
+
+    currentX += deltaX;
+    userVelocity = deltaX;
+    wrapX();
+    gsap.set(strip, { x: currentX });
+  });
+
+  const endDrag = () => {
+    if (!isDragging) return;
+    isDragging = false;
+    wrapper.classList.remove('is-dragging');
+
+    // Inertia fling if dragged with velocity
+    if (Math.abs(userVelocity) > 2) {
+      const momentumDist = userVelocity * 20;
+      const startVal = currentX;
+      const targetVal = currentX + momentumDist;
+
+      momentumTween = gsap.to({ val: startVal }, {
+        val: targetVal,
+        duration: 1.1,
+        ease: "power2.out",
+        onUpdate: function() {
+          currentX = this.targets()[0].val;
+          wrapX();
+          gsap.set(strip, { x: currentX });
+        }
+      });
+    }
+
+    // Reset drag flag after microtask so lightbox clicks don't fire on drag release
+    setTimeout(() => { hasMoved = false; }, 80);
+  };
+
+  window.addEventListener('pointerup', endDrag);
+  window.addEventListener('pointercancel', endDrag);
+
+  // 4. Hover slowdown
+  wrapper.addEventListener('mouseenter', () => { isHovered = true; });
+  wrapper.addEventListener('mouseleave', () => { isHovered = false; });
+
+  // 5. Prev / Next Navigation Buttons
+  const prevBtn = document.querySelector('.cucina-nav-btn.prev');
+  const nextBtn = document.querySelector('.cucina-nav-btn.next');
+
+  const shiftTrack = (amount) => {
+    if (momentumTween) momentumTween.kill();
+    const startVal = currentX;
+    const targetVal = currentX + amount;
+
+    momentumTween = gsap.to({ val: startVal }, {
+      val: targetVal,
+      duration: 0.85,
+      ease: "power2.out",
+      onUpdate: function() {
+        currentX = this.targets()[0].val;
+        wrapX();
+        gsap.set(strip, { x: currentX });
+      }
+    });
+  };
+
+  if (prevBtn) {
+    prevBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const firstCard = strip.querySelector('.project-wrap');
+      const shift = firstCard ? firstCard.offsetWidth : 360;
+      shiftTrack(shift);
+    });
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const firstCard = strip.querySelector('.project-wrap');
+      const shift = firstCard ? firstCard.offsetWidth : 360;
+      shiftTrack(-shift);
+    });
+  }
+
+  // 6. Lightbox delegation (only opens on true click, not drag)
+  strip.addEventListener('click', (e) => {
+    if (hasMoved) {
+      e.preventDefault();
+      e.stopPropagation();
+      return;
+    }
+    const card = e.target.closest('.cucina-card');
+    if (card) {
+      const fullSrc = card.getAttribute('data-full');
+      const lbImg = document.getElementById('cucina-lightbox-img');
+      const lightbox = document.getElementById('cucina-lightbox');
+      if (lbImg && lightbox) {
+        lbImg.src = fullSrc;
+        lightbox.classList.add('active');
+        lightbox.setAttribute('aria-hidden', 'false');
+      }
+    }
+  });
+})();
 
 // GreenSock ScrollTrigger.batch for Reel Cards
 if (typeof ScrollTrigger !== 'undefined' && typeof gsap !== 'undefined') {
