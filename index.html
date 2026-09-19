@@ -81,10 +81,7 @@
       </div>
     </div>
 
-    <!-- Spinning Audio Disc with Circle Logo -->
-    <div class="ig-audio-disc-wrap">
-      <img src="images/brandicom-avatar.png" alt="brandicom.agency" class="ig-audio-disc-img">
-    </div>
+
   </div>
 
   <!-- Bottom Details: User Info, Caption, Music Ticker -->
@@ -102,12 +99,7 @@
       Scaling brands with high-performing viral content 🚀
     </div>
 
-    <a href="https://www.instagram.com/brandicom.agency?stkn=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" class="ig-audio-ticker" style="text-decoration:none;color:inherit;">
-      <svg viewBox="0 0 24 24" width="12" height="12" fill="white" class="ig-music-icon">
-        <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
-      </svg>
-      <span class="ig-audio-name">brandicom.agency • Original audio</span>
-    </a>
+    
   </div>
 
   <!-- iOS Home Indicator -->
@@ -801,6 +793,7 @@ document.addEventListener("DOMContentLoaded", () => {
           const reelId = card.getAttribute('data-reel');
           if (!videoEl && reelId) {
             videoEl = document.createElement('video');
+            videoEl.muted = true;
             videoEl.setAttribute('autoplay', '');
             videoEl.setAttribute('loop', '');
             videoEl.setAttribute('muted', '');
