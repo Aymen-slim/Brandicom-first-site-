@@ -9190,3 +9190,133 @@ a.w-webflow-badge,
 .ig-follow-pill {
   display: none !important;
 }
+
+/* ==========================================================================
+   CASE STUDIES & VIDEO ADS MOBILE VISIBILITY & RESPONSIVENESS FIXES
+   ========================================================================== */
+
+/* Overrides any Webflow stalled visibility locks for case studies, reels, and mockups */
+html.w-mod-js:not(.w-mod-ix3) :is(.studies_collection-link, .studies_collection-image, [slide-up="0.2"], .studies_collection_wrap, .studies_collection_box, .studies_collection-item, .brand_video_wrap_box, .banner-mobile, .cucina-reel-card),
+.studies_collection-link,
+.studies_collection-image,
+.studies_collection_wrap,
+.studies_collection_box,
+.studies_collection-item,
+.section_studies,
+.studies_battom-wrap,
+.studies_battom-inner-wrap,
+.brand_video_wrap_box,
+.banner-mobile {
+  visibility: visible !important;
+}
+
+/* Ensure Case Study Reel Cards ("Ads") on Phone Display Reliably */
+.cucina-reel-card {
+  opacity: 1 !important;
+  transform: none !important;
+  visibility: visible !important;
+}
+
+/* Tablet & Mobile Responsiveness for Case Studies Section (<= 767px) */
+@media screen and (max-width: 767px) {
+  .section_studies {
+    width: 100% !important;
+    overflow: hidden !important;
+  }
+  .studies_battom-wrap {
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    margin-top: 32px !important;
+    grid-column-gap: 0 !important;
+    grid-row-gap: 24px !important;
+  }
+  .studies_battom-inner-wrap {
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 24px !important;
+  }
+  .studies_collection_box {
+    width: 100% !important;
+    display: block !important;
+    box-sizing: border-box !important;
+  }
+  .studies_collection {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  .studies_collection-list {
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0 !important;
+  }
+  .studies_collection-item {
+    width: 100% !important;
+    display: block !important;
+  }
+  .studies_collection-link {
+    width: 100% !important;
+    display: block !important;
+    border-radius: 18px !important;
+    overflow: hidden !important;
+  }
+  .studies_collection_wrap {
+    width: 100% !important;
+    display: block !important;
+  }
+  .studies_collection-image-wrap {
+    width: 100% !important;
+    aspect-ratio: 16 / 10 !important;
+    max-height: 360px !important;
+  }
+  .studies_collection-image {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+  }
+  .studies_collection-btm-wrap {
+    padding: 16px 18px !important;
+  }
+  .case_studies_descripton {
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+  }
+}
+
+/* Small Phones (< 480px) Layout Enhancements */
+@media screen and (max-width: 479px) {
+  .studies_battom-wrap {
+    margin-top: 24px !important;
+    grid-row-gap: 18px !important;
+  }
+  .studies_battom-inner-wrap {
+    gap: 18px !important;
+  }
+  .studies_collection-image-wrap {
+    aspect-ratio: 4 / 3 !important;
+    max-height: 270px !important;
+  }
+  .studies_collection-btm-wrap {
+    padding: 12px 14px !important;
+  }
+  .studies_collection-tag-wrap {
+    padding: 3px 9px !important;
+    font-size: 11px !important;
+    border-radius: 6px !important;
+  }
+  .studies_btm-title-wrap .text-size-medium {
+    font-size: 17px !important;
+    line-height: 1.25 !important;
+  }
+  .case_studies_descripton {
+    font-size: 12px !important;
+    line-height: 1.4 !important;
+  }
+}
+
