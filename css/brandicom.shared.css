@@ -9210,7 +9210,67 @@ html.w-mod-js:not(.w-mod-ix3) :is(.studies_collection-link, .studies_collection-
   visibility: visible !important;
 }
 
+/* Ensure all case study cards are uniformly full-width and identical in size matching Amine */
+.studies_battom-inner-wrap {
+  width: 100% !important;
+  align-items: center !important;
+}
 
+.studies_collection_box {
+  width: 100% !important;
+  max-width: 1200px !important;
+  display: block !important;
+  box-sizing: border-box !important;
+}
+
+.studies_collection {
+  width: 100% !important;
+  max-width: 100% !important;
+  display: block !important;
+}
+
+.studies_collection-list {
+  width: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.studies_collection-item {
+  width: 100% !important;
+  display: block !important;
+}
+
+.studies_collection-link {
+  width: 100% !important;
+  display: block !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+.studies_collection_wrap {
+  width: 100% !important;
+  display: block !important;
+  position: relative !important;
+}
+
+.studies_collection-image-wrap {
+  width: 100% !important;
+  max-width: 100% !important;
+  aspect-ratio: 1200 / 600 !important;
+  position: relative !important;
+}
+
+.studies_collection-image-wrap picture {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.studies_collection-image {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
 
 /* Tablet & Mobile Responsiveness for Case Studies Section (<= 767px) */
 @media screen and (max-width: 767px) {
