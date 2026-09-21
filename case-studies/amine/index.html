@@ -207,78 +207,124 @@
 
 
 /* ==========================================================================
-   VIRAL REELS SHOWCASE (6 Videos with Sound & Play Controls)
+   3D PERSPECTIVE INFINITE REEL SLIDER (NO SECTION BACKGROUND - PURE VIDEO)
+   Matching GreenSock RwKwLWK & Infinite Card Slider
    ========================================================================== */
 .cucina-reels-section {
+  position: relative;
   width: 100%;
-  margin-top: 50px;
-  margin-bottom: 50px;
-  padding-top: 40px;
-  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  margin: 50px 0 70px;
+  padding: 0;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  overflow: visible !important;
 }
 
 .cucina-reels-header {
+  text-align: center;
   margin-bottom: 32px;
+  padding: 0 20px;
+  position: relative;
+  z-index: 2;
+}
+
+.cucina-reels-header .services_text-dot-wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: #7c3aed;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.cucina-reels-header .services_dot-wrap {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #7c3aed;
+  box-shadow: 0 0 10px #7c3aed;
 }
 
 .cucina-reels-header .style-h2 {
-  font-size: 32px;
+  font-size: clamp(28px, 3.8vw, 42px);
   font-weight: 700;
   line-height: 1.25;
   margin-top: 10px;
   margin-bottom: 12px;
-  color: #0d0e12;
+  color: #0d0e12 !important;
 }
 
 .cucina-reels-header p {
   max-width: 680px;
-  margin: 0;
+  margin: 0 auto;
   font-size: 16px;
   line-height: 1.6;
-  color: #4b5563;
+  color: #4b5563 !important;
 }
 
-.cucina-reels-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-}
-
-@media (max-width: 991px) {
-  .cucina-reels-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-  }
-}
-
-@media (max-width: 600px) {
-  .cucina-reels-grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
-    max-width: 360px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
-
-.cucina-reel-card {
+/* 3D Stage Viewport - Full Bleed Width to show left & right reels */
+.cucina-reels-stage {
+  --rw: 250px;
+  --rh: calc(var(--rw) * 16 / 9);
   position: relative;
-  aspect-ratio: 9 / 16;
-  border-radius: 20px;
-  overflow: hidden;
-  background: #0b0c10;
-  box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.28);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  cursor: pointer;
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.4s ease;
-  opacity: 1 !important;
-  transform: none !important;
+  width: 100vw;
+  max-width: 100vw;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  height: 530px;
+  perspective: 1200px;
+  perspective-origin: 50% 50%;
+  transform-style: preserve-3d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: pan-y;
 }
 
-.cucina-reel-card:hover {
-  transform: translateY(-5px) scale(1.01);
-  box-shadow: 0 24px 50px -10px rgba(0, 0, 0, 0.45);
-  border-color: rgba(255, 255, 255, 0.25);
+.cucina-reels-stage:active,
+.cucina-reels-stage.is-dragging {
+  cursor: grabbing;
+}
+
+/* 3D Reel Card - Pure Video with No Overlaid Text */
+.cucina-reel-card {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: var(--rw);
+  height: var(--rh);
+  margin-left: calc(var(--rw) / -2);
+  margin-top: calc(var(--rh) / -2);
+  border-radius: 24px;
+  overflow: hidden;
+  background: #000000;
+  border: 1.5px solid rgba(0, 0, 0, 0.12);
+  box-shadow: 0 16px 36px -6px rgba(0, 0, 0, 0.4);
+  transform-origin: center center;
+  transform-style: preserve-3d;
+  transition: border-color 0.35s ease, box-shadow 0.35s ease, filter 0.35s ease;
+  will-change: transform, opacity, filter;
+  cursor: pointer;
+  flex: none;
+  filter: brightness(0.65);
+}
+
+/* Glowing Outline Border on Active Center Reel (matching GSAP reference) */
+.cucina-reel-card.is-active {
+  border: 2.5px solid #38bdf8 !important;
+  box-shadow: 0 0 35px rgba(56, 189, 248, 0.55), 0 25px 60px -10px rgba(0, 0, 0, 0.65) !important;
+  filter: brightness(1.0) !important;
 }
 
 .cucina-reel-video {
@@ -287,166 +333,76 @@
   object-fit: cover;
   display: block;
   background: #000;
-}
-
-/* Overlay badges and controls */
-.reel-top-bar {
-  position: absolute;
-  top: 14px;
-  left: 14px;
-  right: 14px;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  z-index: 5;
+  border-radius: inherit;
   pointer-events: none;
 }
 
-.reel-tag {
-  display: none !important;
-  background: rgba(0, 0, 0, 0.55);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  color: #ffffff;
-  font-size: 11px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  padding: 4px 10px;
-  border-radius: 9999px;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.reel-tag::before {
-  content: '';
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #ef4444;
-  box-shadow: 0 0 8px #ef4444;
-}
-
+/* Subtle Glass Mute Button - Only visible on active reel to keep side reels pristine */
 .reel-mute-btn {
-  width: 36px;
-  height: 36px;
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
   background: rgba(0, 0, 0, 0.55);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.25);
   color: #fff;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  pointer-events: auto;
-  transition: background 0.2s ease, transform 0.2s ease;
+  z-index: 4;
+  pointer-events: none;
+  transition: background 0.2s ease, transform 0.2s ease, opacity 0.3s ease;
   padding: 0;
+  opacity: 0;
+}
+
+.cucina-reel-card.is-active .reel-mute-btn {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .reel-mute-btn:hover {
-  background: rgba(0, 0, 0, 0.8);
-  transform: scale(1.08);
+  background: rgba(0, 0, 0, 0.85);
+  transform: scale(1.1);
 }
 
 .reel-mute-btn svg {
-  width: 16px;
-  height: 16px;
+  width: 15px;
+  height: 15px;
   fill: currentColor;
 }
 
-/* Play / Pause Central Button */
-.reel-center-btn {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 58px;
-  height: 58px;
-  border-radius: 50%;
-  background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1.5px solid rgba(255, 255, 255, 0.35);
-  color: #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 5;
-  transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s ease;
-  pointer-events: auto;
-  cursor: pointer;
-}
-
-.cucina-reel-card.playing .reel-center-btn {
-  opacity: 0;
-  transform: translate(-50%, -50%) scale(0.85);
-  pointer-events: none;
-}
-
-.cucina-reel-card.playing:hover .reel-center-btn {
-  opacity: 0.85;
-  transform: translate(-50%, -50%) scale(1);
-  pointer-events: auto;
-}
-
-.reel-center-btn svg {
-  width: 22px;
-  height: 22px;
-  fill: currentColor;
-  margin-left: 2px;
-}
-
-.cucina-reel-card.playing .reel-center-btn svg {
-  margin-left: 0;
-}
-
-/* Bottom info and progress */
-.reel-bottom-info {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 30px 16px 14px;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.85) 100%);
-  z-index: 4;
-  pointer-events: none;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.reel-title {
-  color: #ffffff;
-  font-size: 15px;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  margin: 0;
-  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.reel-meta {
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 12px;
-  margin: 0;
-}
-
+/* Video Progress Bar */
 .reel-progress-bar {
   position: absolute;
   bottom: 0;
   left: 0;
   height: 3px;
+  background: linear-gradient(90deg, #38bdf8, #ec4899);
   width: 0%;
-  background: #d97706;
-  z-index: 6;
-  transition: width 0.15s linear;
+  z-index: 5;
+  transition: width 0.1s linear;
 }
+
+@media (max-width: 991px) {
+  .cucina-reels-stage {
+    height: 460px;
+    --rw: 210px;
+  }
+}
+
+@media (max-width: 600px) {
+  .cucina-reels-stage {
+    height: 400px;
+    --rw: 180px;
+  }
+}
+
 
 /* ==========================================================================
    AUTO-GLIDING & DRAGGABLE SEAMLESS HORIZONTAL GALLERY (Clean Natural BG)
@@ -669,144 +625,144 @@
 
 
 <!-- Viral Reels Showcase Section -->
-<section class="cucina-reels-section" slide-up="">
+
+<!-- Viral Reels Showcase Section (3D Perspective Infinite Slider) -->
+
+<!-- Viral Reels Showcase Section (3D Perspective Infinite Slider) -->
+<section class="cucina-reels-section">
   <div class="cucina-reels-header">
-    <div slide-up="" class="services_text-dot-wrap">
+    <div class="services_text-dot-wrap">
       <div class="services_dot-wrap"></div>
       <div class="text-size-regular">Video Strategy</div>
     </div>
     <h2 class="style-h2">Cinematic Property Reels in Action</h2>
     <p>High-converting vertical property Reels produced for Tunidar Immobilier — capturing the architecture, luxury finishes, and aspirational lifestyle of premium Tunisian real estate to drive qualified leads and organic growth.</p>
   </div>
-  <div class="cucina-reels-grid">
-      <!-- Reel 1 -->
-      <div class="cucina-reel-card" data-index="1">
+  <div class="cucina-reels-stage" id="cucinaReelsStage">
+      <div class="cucina-reel-card" data-index="0">
         <video class="cucina-reel-video" preload="metadata" playsinline webkit-playsinline loop muted poster="../../images/amine/amine-reel-1-poster.webp">
           <source src="../../reels/amine/amine-reel-1.mp4" type="video/mp4">
         </video>
-        <div class="reel-top-bar">
-          <button type="button" class="reel-mute-btn" aria-label="Toggle Sound">
-            <svg class="icon-muted" viewBox="0 0 24 24"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
-            <svg class="icon-unmuted" viewBox="0 0 24 24" style="display:none;"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
-          </button>
-        </div>
-        <div class="reel-center-btn" aria-label="Play / Pause">
-          <svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-          <svg class="icon-pause" viewBox="0 0 24 24" style="display:none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-        </div>
-        <div class="reel-bottom-info">
-          <h4 class="reel-title">Ultra Luxe Waterfront Residence</h4>
-          <p class="reel-meta">Chott Mari • Pied dans l'Eau</p>
-        </div>
+        <button class="reel-mute-btn" type="button" aria-label="Toggle Sound">
+          <svg class="icon-muted" viewBox="0 0 24 24"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
+          <svg class="icon-unmuted" viewBox="0 0 24 24" style="display:none;"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+        </button>
         <div class="reel-progress-bar"></div>
       </div>
-      <!-- Reel 2 -->
-      <div class="cucina-reel-card" data-index="2">
+      <div class="cucina-reel-card" data-index="1">
         <video class="cucina-reel-video" preload="metadata" playsinline webkit-playsinline loop muted poster="../../images/amine/amine-reel-2-poster.webp">
           <source src="../../reels/amine/amine-reel-2.mp4" type="video/mp4">
         </video>
-        <div class="reel-top-bar">
-          <button type="button" class="reel-mute-btn" aria-label="Toggle Sound">
-            <svg class="icon-muted" viewBox="0 0 24 24"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
-            <svg class="icon-unmuted" viewBox="0 0 24 24" style="display:none;"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
-          </button>
-        </div>
-        <div class="reel-center-btn" aria-label="Play / Pause">
-          <svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-          <svg class="icon-pause" viewBox="0 0 24 24" style="display:none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-        </div>
-        <div class="reel-bottom-info">
-          <h4 class="reel-title">Votre Paradis vous Attend</h4>
-          <p class="reel-meta">Résidence de Prestige • Bord de Mer</p>
-        </div>
+        <button class="reel-mute-btn" type="button" aria-label="Toggle Sound">
+          <svg class="icon-muted" viewBox="0 0 24 24"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
+          <svg class="icon-unmuted" viewBox="0 0 24 24" style="display:none;"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+        </button>
         <div class="reel-progress-bar"></div>
       </div>
-      <!-- Reel 3 -->
-      <div class="cucina-reel-card" data-index="3">
+      <div class="cucina-reel-card" data-index="2">
         <video class="cucina-reel-video" preload="metadata" playsinline webkit-playsinline loop muted poster="../../images/amine/amine-reel-3-poster.webp">
           <source src="../../reels/amine/amine-reel-3.mp4" type="video/mp4">
         </video>
-        <div class="reel-top-bar">
-          <button type="button" class="reel-mute-btn" aria-label="Toggle Sound">
-            <svg class="icon-muted" viewBox="0 0 24 24"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
-            <svg class="icon-unmuted" viewBox="0 0 24 24" style="display:none;"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
-          </button>
-        </div>
-        <div class="reel-center-btn" aria-label="Play / Pause">
-          <svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-          <svg class="icon-pause" viewBox="0 0 24 24" style="display:none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-        </div>
-        <div class="reel-bottom-info">
-          <h4 class="reel-title">Villa de Rêve à Akouda Sousse</h4>
-          <p class="reel-meta">Villa Luxe • Architecture Moderne</p>
-        </div>
+        <button class="reel-mute-btn" type="button" aria-label="Toggle Sound">
+          <svg class="icon-muted" viewBox="0 0 24 24"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
+          <svg class="icon-unmuted" viewBox="0 0 24 24" style="display:none;"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+        </button>
         <div class="reel-progress-bar"></div>
       </div>
-      <!-- Reel 4 -->
-      <div class="cucina-reel-card" data-index="4">
+      <div class="cucina-reel-card" data-index="3">
         <video class="cucina-reel-video" preload="metadata" playsinline webkit-playsinline loop muted poster="../../images/amine/amine-reel-4-poster.webp">
           <source src="../../reels/amine/amine-reel-4.mp4" type="video/mp4">
         </video>
-        <div class="reel-top-bar">
-          <button type="button" class="reel-mute-btn" aria-label="Toggle Sound">
-            <svg class="icon-muted" viewBox="0 0 24 24"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
-            <svg class="icon-unmuted" viewBox="0 0 24 24" style="display:none;"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
-          </button>
-        </div>
-        <div class="reel-center-btn" aria-label="Play / Pause">
-          <svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-          <svg class="icon-pause" viewBox="0 0 24 24" style="display:none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-        </div>
-        <div class="reel-bottom-info">
-          <h4 class="reel-title">Résidence El Kantaoui Standing</h4>
-          <p class="reel-meta">À partir de 298.000 DT • Livraison 2026</p>
-        </div>
+        <button class="reel-mute-btn" type="button" aria-label="Toggle Sound">
+          <svg class="icon-muted" viewBox="0 0 24 24"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
+          <svg class="icon-unmuted" viewBox="0 0 24 24" style="display:none;"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+        </button>
         <div class="reel-progress-bar"></div>
       </div>
-      <!-- Reel 5 -->
-      <div class="cucina-reel-card" data-index="5">
+      <div class="cucina-reel-card" data-index="4">
         <video class="cucina-reel-video" preload="metadata" playsinline webkit-playsinline loop muted poster="../../images/amine/amine-reel-5-poster.webp">
           <source src="../../reels/amine/amine-reel-5.mp4" type="video/mp4">
         </video>
-        <div class="reel-top-bar">
-          <button type="button" class="reel-mute-btn" aria-label="Toggle Sound">
-            <svg class="icon-muted" viewBox="0 0 24 24"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
-            <svg class="icon-unmuted" viewBox="0 0 24 24" style="display:none;"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
-          </button>
-        </div>
-        <div class="reel-center-btn" aria-label="Play / Pause">
-          <svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-          <svg class="icon-pause" viewBox="0 0 24 24" style="display:none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-        </div>
-        <div class="reel-bottom-info">
-          <h4 class="reel-title">Appartement Moderne à 180.000 DT</h4>
-          <p class="reel-meta">Investissement Immobilier • Financement Disponible</p>
-        </div>
+        <button class="reel-mute-btn" type="button" aria-label="Toggle Sound">
+          <svg class="icon-muted" viewBox="0 0 24 24"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
+          <svg class="icon-unmuted" viewBox="0 0 24 24" style="display:none;"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+        </button>
         <div class="reel-progress-bar"></div>
       </div>
-      <!-- Reel 6 -->
-      <div class="cucina-reel-card" data-index="6">
+      <div class="cucina-reel-card" data-index="5">
         <video class="cucina-reel-video" preload="metadata" playsinline webkit-playsinline loop muted poster="../../images/amine/amine-reel-6-poster.webp">
           <source src="../../reels/amine/amine-reel-6.mp4" type="video/mp4">
         </video>
-        <div class="reel-top-bar">
-          <button type="button" class="reel-mute-btn" aria-label="Toggle Sound">
-            <svg class="icon-muted" viewBox="0 0 24 24"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
-            <svg class="icon-unmuted" viewBox="0 0 24 24" style="display:none;"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
-          </button>
-        </div>
-        <div class="reel-center-btn" aria-label="Play / Pause">
-          <svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-          <svg class="icon-pause" viewBox="0 0 24 24" style="display:none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-        </div>
-        <div class="reel-bottom-info">
-          <h4 class="reel-title">AQO — Signature Collection</h4>
-          <p class="reel-meta">Résidence Exceptionnelle • Exclusivité</p>
-        </div>
+        <button class="reel-mute-btn" type="button" aria-label="Toggle Sound">
+          <svg class="icon-muted" viewBox="0 0 24 24"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
+          <svg class="icon-unmuted" viewBox="0 0 24 24" style="display:none;"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+        </button>
+        <div class="reel-progress-bar"></div>
+      </div>
+      <div class="cucina-reel-card" data-index="6">
+        <video class="cucina-reel-video" preload="metadata" playsinline webkit-playsinline loop muted poster="../../images/amine/amine-reel-1-poster.webp">
+          <source src="../../reels/amine/amine-reel-1.mp4" type="video/mp4">
+        </video>
+        <button class="reel-mute-btn" type="button" aria-label="Toggle Sound">
+          <svg class="icon-muted" viewBox="0 0 24 24"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
+          <svg class="icon-unmuted" viewBox="0 0 24 24" style="display:none;"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+        </button>
+        <div class="reel-progress-bar"></div>
+      </div>
+      <div class="cucina-reel-card" data-index="7">
+        <video class="cucina-reel-video" preload="metadata" playsinline webkit-playsinline loop muted poster="../../images/amine/amine-reel-2-poster.webp">
+          <source src="../../reels/amine/amine-reel-2.mp4" type="video/mp4">
+        </video>
+        <button class="reel-mute-btn" type="button" aria-label="Toggle Sound">
+          <svg class="icon-muted" viewBox="0 0 24 24"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
+          <svg class="icon-unmuted" viewBox="0 0 24 24" style="display:none;"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+        </button>
+        <div class="reel-progress-bar"></div>
+      </div>
+      <div class="cucina-reel-card" data-index="8">
+        <video class="cucina-reel-video" preload="metadata" playsinline webkit-playsinline loop muted poster="../../images/amine/amine-reel-3-poster.webp">
+          <source src="../../reels/amine/amine-reel-3.mp4" type="video/mp4">
+        </video>
+        <button class="reel-mute-btn" type="button" aria-label="Toggle Sound">
+          <svg class="icon-muted" viewBox="0 0 24 24"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
+          <svg class="icon-unmuted" viewBox="0 0 24 24" style="display:none;"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+        </button>
+        <div class="reel-progress-bar"></div>
+      </div>
+      <div class="cucina-reel-card" data-index="9">
+        <video class="cucina-reel-video" preload="metadata" playsinline webkit-playsinline loop muted poster="../../images/amine/amine-reel-4-poster.webp">
+          <source src="../../reels/amine/amine-reel-4.mp4" type="video/mp4">
+        </video>
+        <button class="reel-mute-btn" type="button" aria-label="Toggle Sound">
+          <svg class="icon-muted" viewBox="0 0 24 24"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
+          <svg class="icon-unmuted" viewBox="0 0 24 24" style="display:none;"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+        </button>
+        <div class="reel-progress-bar"></div>
+      </div>
+      <div class="cucina-reel-card" data-index="10">
+        <video class="cucina-reel-video" preload="metadata" playsinline webkit-playsinline loop muted poster="../../images/amine/amine-reel-5-poster.webp">
+          <source src="../../reels/amine/amine-reel-5.mp4" type="video/mp4">
+        </video>
+        <button class="reel-mute-btn" type="button" aria-label="Toggle Sound">
+          <svg class="icon-muted" viewBox="0 0 24 24"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
+          <svg class="icon-unmuted" viewBox="0 0 24 24" style="display:none;"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+        </button>
+        <div class="reel-progress-bar"></div>
+      </div>
+      <div class="cucina-reel-card" data-index="11">
+        <video class="cucina-reel-video" preload="metadata" playsinline webkit-playsinline loop muted poster="../../images/amine/amine-reel-6-poster.webp">
+          <source src="../../reels/amine/amine-reel-6.mp4" type="video/mp4">
+        </video>
+        <button class="reel-mute-btn" type="button" aria-label="Toggle Sound">
+          <svg class="icon-muted" viewBox="0 0 24 24"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
+          <svg class="icon-unmuted" viewBox="0 0 24 24" style="display:none;"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+        </button>
         <div class="reel-progress-bar"></div>
       </div>
   </div>
 </section>
+
+
 
         </div><!-- close detail_rich-text-wrap -->
       </div><!-- close detail_main-wrapper -->
@@ -944,90 +900,271 @@
 </div>
 
 <script>
-/* ============================================================
-   Reel Play / Pause / Mute Controls
-   ============================================================ */
-(function () {
+
+// ============================================================
+// 3D INFINITE REEL SLIDER CONTROLLER (CoverFlow Arc Cylinder)
+// Matching GreenSock RwKwLWK & Infinite Card Slider
+// Auto-scroll + Drag + Wheel Scroll + Center Snap + Smart Autoplay
+// ============================================================
+// 3D INFINITE REEL SLIDER CONTROLLER (3D Perspective Arc Cylinder)
+// Matching GreenSock RwKwLWK & Infinite Card Slider
+// Auto-scroll + Drag + Wheel Scroll + Center Snap + Smart Autoplay
+// ============================================================
+(function init3DReelsController() {
   'use strict';
-  const cards = document.querySelectorAll('.cucina-reel-card');
-  let currentPlaying = null;
 
-  cards.forEach(function (card) {
-    const video = card.querySelector('.cucina-reel-video');
-    const centerBtn = card.querySelector('.reel-center-btn');
-    const muteBtn = card.querySelector('.reel-mute-btn');
-    const progressBar = card.querySelector('.reel-progress-bar');
-    const playIcon = centerBtn.querySelector('.icon-play');
-    const pauseIcon = centerBtn.querySelector('.icon-pause');
-    const mutedIcon = muteBtn.querySelector('.icon-muted');
-    const unmutedIcon = muteBtn.querySelector('.icon-unmuted');
+  var stage = document.getElementById('cucinaReelsStage') || document.querySelector('.cucina-reels-stage');
+  if (!stage) return;
 
-    function playCard() {
-      if (currentPlaying && currentPlaying !== card) {
-        var prevVideo = currentPlaying.querySelector('.cucina-reel-video');
-        prevVideo.pause();
-        currentPlaying.classList.remove('playing');
-        var prevPlay = currentPlaying.querySelector('.icon-play');
-        var prevPause = currentPlaying.querySelector('.icon-pause');
-        if (prevPlay) prevPlay.style.display = '';
-        if (prevPause) prevPause.style.display = 'none';
+  var cards = Array.from(stage.querySelectorAll('.cucina-reel-card'));
+  var total = cards.length;
+  if (total === 0) return;
+
+  var curProgress = 0.0;
+  var targetProgress = 0.0;
+  var isDragging = false;
+  var startX = 0;
+  var lastX = 0;
+  var startProgress = 0;
+  var dragVelocity = 0;
+  var inView = true;
+  var autoScrollTimer = null;
+  var isUserInteracting = false;
+  var idleTimer = null;
+  var snapTimer = null;
+
+  function getResponsiveConfig() {
+    var w = window.innerWidth;
+    if (w <= 600) {
+      // Mobile: 3 visible cards snugly flanking center
+      return { baseSpacing: 140, powMult: 20, zMult: 80, rotMult: 26, maxRot: 45, maxVisibleDiff: 2.5 };
+    } else if (w <= 991) {
+      // Tablet: 5 visible cards
+      return { baseSpacing: 175, powMult: 22, zMult: 90, rotMult: 24, maxRot: 45, maxVisibleDiff: 3.5 };
+    } else {
+      // Desktop: 5-7 visible cards (-3, -2, -1, 0, +1, +2, +3)
+      return { baseSpacing: 215, powMult: 26, zMult: 105, rotMult: 22, maxRot: 44, maxVisibleDiff: 4.2 };
+    }
+  }
+
+  function updateCards(progress) {
+    var cfg = getResponsiveConfig();
+
+    cards.forEach(function (card, idx) {
+      var diff = ((idx - progress) % total + total) % total;
+      if (diff > total / 2) diff -= total;
+
+      var absDiff = Math.abs(diff);
+      var sign = Math.sign(diff);
+
+      if (absDiff > cfg.maxVisibleDiff) {
+        card.style.opacity = '0';
+        card.style.pointerEvents = 'none';
+        card.style.transform = 'translate3d(0px, 0px, -999px)';
+        return;
       }
-      video.play();
-      card.classList.add('playing');
-      playIcon.style.display = 'none';
-      pauseIcon.style.display = '';
-      currentPlaying = card;
-    }
 
-    function pauseCard() {
-      video.pause();
-      card.classList.remove('playing');
-      playIcon.style.display = '';
-      pauseIcon.style.display = 'none';
-      if (currentPlaying === card) currentPlaying = null;
-    }
+      // 3D positioning: X pushes outward, Z pushes backward, RotY turns toward center
+      var x = sign * (absDiff * cfg.baseSpacing + Math.pow(absDiff, 1.1) * cfg.powMult);
+      var z = -Math.pow(absDiff, 1.25) * cfg.zMult;
+      var rotY = -sign * Math.min(cfg.maxRot, Math.pow(absDiff, 0.92) * cfg.rotMult);
+      var scale = Math.max(0.52, 1 - absDiff * 0.11);
+      var opacity = Math.max(0, 1 - Math.pow(absDiff / (cfg.maxVisibleDiff + 0.2), 2));
+      var zIndex = Math.round(100 - absDiff * 15);
+      var brightness = Math.max(0.4, 1 - absDiff * 0.22);
 
-    centerBtn.addEventListener('click', function (e) {
-      e.stopPropagation();
-      if (video.paused) { playCard(); } else { pauseCard(); }
+      card.style.transform = 'translate3d(' + x.toFixed(1) + 'px, 0px, ' + z.toFixed(1) + 'px) rotateY(' + rotY.toFixed(1) + 'deg) scale(' + scale.toFixed(3) + ')';
+      card.style.opacity = opacity.toFixed(3);
+      card.style.zIndex = zIndex;
+      card.style.pointerEvents = absDiff > 2.5 ? 'none' : 'auto';
+
+      var video = card.querySelector('.cucina-reel-video');
+      if (absDiff < 0.42) {
+        card.classList.add('is-active');
+        card.style.filter = 'brightness(1)';
+        if (video && inView && video.paused) {
+          video.play().catch(function () {});
+        }
+      } else {
+        card.classList.remove('is-active');
+        card.style.filter = 'brightness(' + brightness.toFixed(2) + ')';
+        if (video && !video.paused) {
+          video.pause();
+        }
+      }
     });
+  }
 
+  updateCards(curProgress);
+
+  function render() {
+    var diff = targetProgress - curProgress;
+    if (Math.abs(diff) > 0.0004) {
+      curProgress += diff * 0.14;
+      updateCards(curProgress);
+    }
+    requestAnimationFrame(render);
+  }
+  requestAnimationFrame(render);
+
+  function triggerAutoAdvance() {
+    if (isUserInteracting || isDragging || !inView) return;
+    targetProgress = Math.round(targetProgress) + 1;
+  }
+
+  function startAutoScroll() {
+    stopAutoScroll();
+    autoScrollTimer = setInterval(triggerAutoAdvance, 3800);
+  }
+
+  function stopAutoScroll() {
+    if (autoScrollTimer) {
+      clearInterval(autoScrollTimer);
+      autoScrollTimer = null;
+    }
+  }
+
+  function markInteraction() {
+    isUserInteracting = true;
+    stopAutoScroll();
+    clearTimeout(idleTimer);
+    idleTimer = setTimeout(function () {
+      isUserInteracting = false;
+      startAutoScroll();
+    }, 3500);
+  }
+
+  startAutoScroll();
+
+  // Pointer / Touch / Mouse Drag
+  function onPointerDown(e) {
+    if (e.target.closest('.reel-mute-btn')) return;
+    isDragging = true;
+    startX = e.clientX || (e.touches && e.touches[0].clientX) || 0;
+    lastX = startX;
+    startProgress = targetProgress;
+    dragVelocity = 0;
+    stage.classList.add('is-dragging');
+    markInteraction();
+  }
+
+  function onPointerMove(e) {
+    if (!isDragging) return;
+    var currentX = e.clientX || (e.touches && e.touches[0].clientX) || 0;
+    var deltaX = currentX - lastX;
+    dragVelocity = deltaX;
+    lastX = currentX;
+
+    var totalDelta = currentX - startX;
+    var cfg = getResponsiveConfig();
+    targetProgress = startProgress - (totalDelta / cfg.baseSpacing);
+    markInteraction();
+  }
+
+  function onPointerUp() {
+    if (!isDragging) return;
+    isDragging = false;
+    stage.classList.remove('is-dragging');
+
+    // Momentum flick
+    if (Math.abs(dragVelocity) > 4) {
+      targetProgress -= dragVelocity * 0.02;
+    }
+    targetProgress = Math.round(targetProgress);
+    markInteraction();
+  }
+
+  stage.addEventListener('mousedown', onPointerDown);
+  window.addEventListener('mousemove', onPointerMove);
+  window.addEventListener('mouseup', onPointerUp);
+
+  stage.addEventListener('touchstart', onPointerDown, { passive: true });
+  window.addEventListener('touchmove', onPointerMove, { passive: true });
+  window.addEventListener('touchend', onPointerUp);
+
+  // Wheel Horizontal Scroll with debounce snap
+  stage.addEventListener('wheel', function (e) {
+    var delta = e.deltaX !== 0 ? e.deltaX : e.deltaY;
+    if (Math.abs(delta) > 5) {
+      e.preventDefault();
+      markInteraction();
+      targetProgress += (delta > 0 ? 0.35 : -0.35);
+
+      clearTimeout(snapTimer);
+      snapTimer = setTimeout(function () {
+        targetProgress = Math.round(targetProgress);
+      }, 250);
+    }
+  }, { passive: false });
+
+  // Click on flanking cards to bring them to center
+  cards.forEach(function (card, idx) {
     card.addEventListener('click', function (e) {
-      if (e.target === muteBtn || muteBtn.contains(e.target)) return;
-      if (e.target === centerBtn || centerBtn.contains(e.target)) return;
-      if (video.paused) { playCard(); } else { pauseCard(); }
-    });
-
-    muteBtn.addEventListener('click', function (e) {
-      e.stopPropagation();
-      video.muted = !video.muted;
-      mutedIcon.style.display = video.muted ? '' : 'none';
-      unmutedIcon.style.display = video.muted ? 'none' : '';
-    });
-
-    video.addEventListener('timeupdate', function () {
-      if (video.duration) {
-        progressBar.style.width = ((video.currentTime / video.duration) * 100) + '%';
+      if (e.target.closest('.reel-mute-btn')) return;
+      var diff = ((idx - curProgress) % total + total) % total;
+      if (diff > total / 2) diff -= total;
+      if (Math.abs(diff) > 0.4) {
+        markInteraction();
+        targetProgress = Math.round(curProgress + diff);
       }
     });
   });
 
-  /* Intersection Observer: animate cards on scroll */
-  var io = new IntersectionObserver(function (entries) {
-    entries.forEach(function (entry) {
-      if (entry.isIntersecting) {
-        entry.target.style.transition = 'opacity 0.7s ease, transform 0.7s cubic-bezier(0.16,1,0.3,1)';
-        entry.target.style.opacity = '1';
-        entry.target.style.transform = 'translateY(0)';
-        io.unobserve(entry.target);
+  // Sound toggle
+  cards.forEach(function (card) {
+    var btn = card.querySelector('.reel-mute-btn');
+    var video = card.querySelector('.cucina-reel-video');
+    if (!btn || !video) return;
+
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      markInteraction();
+      var isMuted = video.muted;
+      video.muted = !isMuted;
+      var iconMuted = btn.querySelector('.icon-muted');
+      var iconUnmuted = btn.querySelector('.icon-unmuted');
+      if (iconMuted && iconUnmuted) {
+        iconMuted.style.display = isMuted ? 'none' : 'block';
+        iconUnmuted.style.display = isMuted ? 'block' : 'none';
       }
     });
-  }, { threshold: 0.12 });
 
-  cards.forEach(function (c) { io.observe(c); });
+    // Progress bar update
+    video.addEventListener('timeupdate', function () {
+      var bar = card.querySelector('.reel-progress-bar');
+      if (bar && video.duration) {
+        bar.style.width = ((video.currentTime / video.duration) * 100).toFixed(1) + '%';
+      }
+    });
+  });
+
+  // IntersectionObserver for viewport pause
+  if ('IntersectionObserver' in window) {
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        inView = entry.isIntersecting;
+        if (!inView) {
+          stopAutoScroll();
+          cards.forEach(function (c) {
+            var v = c.querySelector('.cucina-reel-video');
+            if (v && !v.paused) v.pause();
+          });
+        } else {
+          startAutoScroll();
+          updateCards(curProgress);
+        }
+      });
+    }, { threshold: 0.2 });
+    observer.observe(stage);
+  }
+
+  window.addEventListener('resize', function () {
+    updateCards(curProgress);
+  });
 })();
 
-/* ============================================================
+
+  /* ============================================================
    Auto-Gliding & Draggable Gallery with GSAP ticker
    ============================================================ */
 (function () {

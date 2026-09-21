@@ -9210,12 +9210,7 @@ html.w-mod-js:not(.w-mod-ix3) :is(.studies_collection-link, .studies_collection-
   visibility: visible !important;
 }
 
-/* Ensure Case Study Reel Cards ("Ads") on Phone Display Reliably */
-.cucina-reel-card {
-  opacity: 1 !important;
-  transform: none !important;
-  visibility: visible !important;
-}
+
 
 /* Tablet & Mobile Responsiveness for Case Studies Section (<= 767px) */
 @media screen and (max-width: 767px) {
