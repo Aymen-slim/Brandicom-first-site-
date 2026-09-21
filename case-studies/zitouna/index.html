@@ -157,7 +157,7 @@
 
 /* 3D Stage Viewport - Full Bleed Width to show left & right reels */
 .cucina-reels-stage {
-  --rw: 480px;
+  --rw: 380px;
   --rh: calc(var(--rw) * 16 / 9);
   position: relative;
   width: 100vw;
@@ -166,7 +166,7 @@
   right: 50%;
   margin-left: -50vw;
   margin-right: -50vw;
-  height: 920px;
+  height: 740px;
   perspective: 1400px;
   perspective-origin: 50% 50%;
   transform-style: preserve-3d;
@@ -880,7 +880,7 @@
 
   function updateCards(progress) {
     var stageWidth = stage.offsetWidth;
-    var xSpacing = Math.min(stageWidth * 0.42, 380);
+    var xSpacing = Math.min(stageWidth * 0.35, 290);
     if (stageWidth < 600) {
       xSpacing = Math.min(stageWidth * 0.65, 230);
     }
@@ -949,7 +949,7 @@
     lastTime = now;
 
     var totalDx = clientX - startX;
-    var progressChange = -totalDx / 380;
+    var progressChange = -totalDx / 290;
     curProgress = wrap(startProgress + progressChange, N);
     updateCards(curProgress);
   }

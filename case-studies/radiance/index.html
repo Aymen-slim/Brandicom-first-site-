@@ -245,7 +245,7 @@
 
 /* 3D Stage Viewport - Full Bleed Width to show left & right reels */
 .cucina-reels-stage {
-  --rw: 480px;
+  --rw: 380px;
   --rh: calc(var(--rw) * 16 / 9);
   position: relative;
   width: 100vw;
@@ -254,7 +254,7 @@
   right: 50%;
   margin-left: -50vw;
   margin-right: -50vw;
-  height: 920px;
+  height: 740px;
   perspective: 1400px;
   perspective-origin: 50% 50%;
   transform-style: preserve-3d;
@@ -1416,8 +1416,8 @@ window.addEventListener('DOMContentLoaded', () => {
     } else if (w <= 991) {
       return { baseSpacing: 240, powMult: 28, zMult: 90, rotMult: 26, maxRot: 45 };
     } else {
-      // Snug spacing calibrated for 480px doubled reel cards
-      return { baseSpacing: 340, powMult: 36, zMult: 110, rotMult: 24, maxRot: 42 };
+      // Calibrated spacing for 380px reel cards on desktop
+      return { baseSpacing: 280, powMult: 30, zMult: 95, rotMult: 24, maxRot: 42 };
     }
   }
 
