@@ -709,7 +709,7 @@
     <!-- Lightbox for Gallery Photos -->
     <div id="cucina-lightbox" class="cucina-lightbox">
       <div id="cucina-lightbox-close" class="cucina-lightbox-close">&times;</div>
-      <img id="cucina-lightbox-img" class="cucina-lightbox-img" src="" alt="Zitouna Photo Preview">
+      <img id="cucina-lightbox-img" class="cucina-lightbox-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Zitouna Photo Preview">
     </div>
 
     <!-- Introduction, Results & Testimonial Section -->
@@ -775,9 +775,9 @@
                       <div class="text-size-medium text-weight-medium">Karim Ben Salem</div>
                       <div class="text-size-regular text-color-dark">Managing Partner, Zitouna Café Resto</div>
                     </div>
-                    <a href="#" class="detail_feedback-logo-wrap w-inline-block">
+                    <div class="detail_feedback-logo-wrap">
                       <img src="../../images/brandicom-mark.png" loading="lazy" alt="Brandicom" class="detail_feedback-logo">
-                    </a>
+                    </div>
                   </div>
                   <div class="detail_feedback-star-text-wrap">
                     <div class="text-size-xmedium">5.0</div>
@@ -1144,7 +1144,7 @@
   function closeLightbox() {
     lightbox.classList.remove('active');
     document.body.style.overflow = '';
-    setTimeout(function () { lightboxImg.src = ''; }, 350);
+    setTimeout(function () { lightboxImg.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'; }, 350);
   }
 
   if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);

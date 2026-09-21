@@ -870,7 +870,7 @@
 <!-- Lightbox Modal -->
 <div class="cucina-lightbox" id="cucina-lightbox" role="dialog" aria-modal="true" aria-label="Image fullscreen view">
   <button class="cucina-lightbox-close" id="cucina-lightbox-close" aria-label="Close fullscreen">&times;</button>
-  <img class="cucina-lightbox-img" id="cucina-lightbox-img" src="" alt="">
+  <img class="cucina-lightbox-img" id="cucina-lightbox-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">
 </div>
 
 <script>
@@ -1231,7 +1231,7 @@
   function closeLightbox() {
     lightbox.classList.remove('active');
     document.body.style.overflow = '';
-    setTimeout(function () { lightboxImg.src = ''; }, 350);
+    setTimeout(function () { lightboxImg.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"; }, 350);
   }
 
   lightboxClose.addEventListener('click', closeLightbox);
