@@ -286,23 +286,23 @@
   border-radius: 28px;
   overflow: hidden;
   background: #000000;
-  border: 1.5px solid rgba(0, 0, 0, 0.14);
+  border: none !important;
   box-shadow: 0 16px 36px -6px rgba(0, 0, 0, 0.35);
   transform-origin: center center;
   transform-style: preserve-3d;
   -webkit-transform-style: preserve-3d;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
-  transition: border-color 0.35s ease, box-shadow 0.35s ease;
+  transition: box-shadow 0.35s ease;
   cursor: pointer;
   flex: none;
   filter: none !important;
 }
 
-/* Crisp Focused Outline Border on Active Center Reel (No blurry glow haze) */
+/* Active Center Reel - Clean Borderless Presentation */
 .cucina-reel-card.is-active {
-  border: 2.5px solid #c084fc !important;
-  box-shadow: 0 25px 60px -10px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(192, 132, 252, 0.4) !important;
+  border: none !important;
+  box-shadow: 0 25px 60px -10px rgba(0, 0, 0, 0.75) !important;
   filter: none !important;
 }
 
@@ -363,7 +363,7 @@
   bottom: 0;
   left: 0;
   height: 3px;
-  background: linear-gradient(90deg, #c084fc, #ec4899);
+  background: rgba(255, 255, 255, 0.85);
   width: 0%;
   z-index: 5;
   transition: width 0.1s linear;
