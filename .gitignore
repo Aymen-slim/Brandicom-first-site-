@@ -5,6 +5,8 @@ desktop.ini
 reels/Not*.mp4
 reels/You*.mp4
 reels/**/test_*.mp4
-clients/
+clients/*
+!clients/about.MP4
+!clients/about-poster.webp
 *.py
 scratch/
