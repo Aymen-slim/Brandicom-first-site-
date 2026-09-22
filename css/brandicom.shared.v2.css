@@ -4539,7 +4539,7 @@ figure {
   aspect-ratio: 1200 / 600;
   border-radius: var(--_base---bordar-radius--bordar-radius-x7);
   object-fit: cover;
-  object-position: 50% 18%;
+  object-position: center !important;
   width: 100%;
   height: 100%;
 }
@@ -5229,7 +5229,7 @@ figure {
 
 .studies_collection-image {
   object-fit: cover;
-  object-position: 50% 20%;
+  object-position: center;
   width: 100%;
   height: 100%;
 }
@@ -9270,6 +9270,7 @@ html.w-mod-js:not(.w-mod-ix3) :is(.studies_collection-link, .studies_collection-
   width: 100% !important;
   height: 100% !important;
   object-fit: cover !important;
+  object-position: center !important;
 }
 
 /* Tablet & Mobile Responsiveness for Case Studies Section (<= 767px) */
@@ -9332,6 +9333,7 @@ html.w-mod-js:not(.w-mod-ix3) :is(.studies_collection-link, .studies_collection-
     width: 100% !important;
     height: 100% !important;
     object-fit: cover !important;
+    object-position: center !important;
   }
   .studies_collection-btm-wrap {
     padding: 16px 18px !important;
