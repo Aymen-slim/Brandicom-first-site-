@@ -16,3 +16,23 @@ package-lock.json
 reels/Not*.mp4
 reels/You*.mp4
 
+# Dev-only python helpers at repo root (never referenced by pages)
+*.py
+
+# Raw client source folders: unreferenced by the site and contain files over
+# the 25 MiB Workers static-asset limit (deploy fails otherwise). Only
+# clients/about.MP4 is used (about page hero video), so each source
+# subfolder is excluded explicitly (no negation tricks).
+clients/amine/
+clients/Cookiezannou/
+clients/La Cucina/
+clients/Pickel_z/
+clients/Tour Khalaf/
+clients/Yamatcha/
+clients/Zitouna/
+clients/about-poster.webp
+
+# Unreferenced local-only folders
+scratch/
+images for about page/
+
