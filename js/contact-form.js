@@ -12,6 +12,19 @@
     if (el) el.style.display = visible ? "block" : "none";
   }
 
+  function getContactEndpoint() {
+    if (typeof window.CONTACT_API_URL === "string" && window.CONTACT_API_URL) {
+      return window.CONTACT_API_URL;
+    }
+
+    var protocol = window.location.protocol;
+    if (protocol !== "http:" && protocol !== "https:") {
+      return null;
+    }
+
+    return new URL("/api/contact", window.location.origin).href;
+  }
+
   form.addEventListener("submit", function (event) {
     event.preventDefault();
     event.stopImmediatePropagation();
@@ -29,20 +42,45 @@
     }
 
     var payload = {
-      name: (document.getElementById("name") || {}).value || "",
-      email: (document.getElementById("mail") || {}).value || "",
-      budget: (document.getElementById("social-budgeyt") || {}).value || "",
-      message: (document.getElementById("field") || {}).value || "",
+      name: ((document.getElementById("name") || {}).value || "").trim(),
+      email: ((document.getElementById("mail") || {}).value || "").trim(),
+      budget: ((document.getElementById("social-budgeyt") || {}).value || "").trim(),
+      message: ((document.getElementById("field") || {}).value || "").trim(),
       services: services,
-      company_website: (document.getElementById("company_website") || {}).value || "",
+      company_website: ((document.getElementById("company_website") || {}).value || "").trim(),
     };
+
+    var validationError = null;
+    if (payload.name.length < 2) validationError = "Enter your name.";
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(payload.email)) {
+      validationError = "Enter a valid email address.";
+    } else if (!payload.budget) validationError = "Enter your social budget.";
+    else if (!payload.services.length) validationError = "Choose at least one service.";
+
+    if (validationError) {
+      if (fail) {
+        fail.textContent = validationError;
+        show(fail, true);
+      }
+      return;
+    }
+
+    var endpoint = getContactEndpoint();
+    if (!endpoint) {
+      if (fail) {
+        fail.textContent =
+          "This form must be opened over http://localhost. Run npm run dev, then visit /contact/.";
+        show(fail, true);
+      }
+      return;
+    }
 
     if (button) {
       button.disabled = true;
       button.value = button.getAttribute("data-wait") || "Please wait...";
     }
 
-    fetch("/api/contact", {
+    fetch(endpoint, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
