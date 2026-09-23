@@ -14,7 +14,7 @@ function parseBody(body) {
   const services = ALLOWED_SERVICES.filter((service) => rawServices.includes(service));
 
   if (body && body.company_website) {
-    return { error: "Unable to send your message." };
+    return { error: "Unable to send your message.", code: "spam_blocked" };
   }
   if (name.length < 2) return { error: "Enter your name." };
   if (!EMAIL_RE.test(email)) return { error: "Enter a valid email address." };
@@ -33,7 +33,7 @@ module.exports = async function handler(req, res) {
 
   const parsed = parseBody(req.body || {});
   if (parsed.error) {
-    res.status(400).json({ error: parsed.error });
+    res.status(400).json({ error: parsed.error, code: parsed.code || "validation_failed" });
     return;
   }
 
@@ -44,19 +44,28 @@ module.exports = async function handler(req, res) {
     return;
   }
 
-  const response = await fetch(supabaseUrl.replace(/\/$/, "") + "/rest/v1/contact_submissions", {
-    method: "POST",
-    headers: {
-      apikey: serviceKey,
-      Authorization: "Bearer " + serviceKey,
-      "Content-Type": "application/json",
-      Prefer: "return=minimal",
-    },
-    body: JSON.stringify(parsed.row),
-  });
+  let response;
+  try {
+    response = await fetch(supabaseUrl.replace(/\/$/, "") + "/rest/v1/contact_submissions", {
+      method: "POST",
+      headers: {
+        apikey: serviceKey,
+        Authorization: "Bearer " + serviceKey,
+        "Content-Type": "application/json",
+        Prefer: "return=minimal",
+      },
+      body: JSON.stringify(parsed.row),
+    });
+  } catch (fetchError) {
+    console.error("Supabase fetch failed:", fetchError);
+    res.status(502).json({ error: "Unable to send your message.", code: "storage_fetch_failed" });
+    return;
+  }
 
   if (!response.ok) {
-    res.status(502).json({ error: "Unable to send your message." });
+    const detail = await response.text().catch(() => "");
+    console.error("Supabase insert failed:", response.status, detail);
+    res.status(502).json({ error: "Unable to send your message.", code: "storage_insert_failed" });
     return;
   }
 

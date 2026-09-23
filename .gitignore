@@ -12,3 +12,4 @@ clients/*
 scratch/
 .env
 .env.*
+tems image/
