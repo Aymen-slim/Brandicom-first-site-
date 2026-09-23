@@ -10,3 +10,5 @@ clients/*
 !clients/about-poster.webp
 *.py
 scratch/
+.env
+.env.*
