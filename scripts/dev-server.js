@@ -6,6 +6,7 @@ const { URL } = require("url");
 const ROOT = path.join(__dirname, "..");
 const PORT = Number(process.env.PORT) || 8765;
 const contactHandler = require("../api/contact");
+const postsHandler = require("../api/posts");
 
 const MIME = {
   ".html": "text/html; charset=utf-8",
@@ -137,6 +138,21 @@ loadEnv();
 
 const server = http.createServer(function (req, res) {
   const pathname = new URL(req.url, "http://localhost").pathname;
+
+  if (pathname === "/api/posts") {
+    const requestUrl = new URL(req.url, "http://localhost");
+    postsHandler(
+      { method: req.method, query: { slug: requestUrl.searchParams.get("slug") || "" } },
+      createVercelResponse(res)
+    ).catch(function (error) {
+      console.error("Posts API failed:", error);
+      if (!res.headersSent) {
+        res.writeHead(500, { "Content-Type": "application/json; charset=utf-8" });
+        res.end(JSON.stringify({ error: "Unable to load posts.", posts: [] }));
+      }
+    });
+    return;
+  }
 
   if (pathname === "/api/contact") {
     handleContact(req, res).catch(function (error) {
