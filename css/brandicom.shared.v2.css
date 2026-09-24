@@ -3579,6 +3579,14 @@ figure {
   inset: 71% auto auto 0%;
 }
 
+.team_data-wrap.eight {
+  top: 86%;
+  left: auto;
+  right: 0;
+  bottom: auto;
+  inset: 86% 0% auto auto;
+}
+
 .team_btm-absloute-wrap {
   z-index: 4;
   grid-column-gap: 16px;
@@ -6755,7 +6763,7 @@ figure {
 }
 
 .section_team_height {
-  min-height: 700vh;
+  min-height: 800vh;
 }
 
 .section_team_sticky {
