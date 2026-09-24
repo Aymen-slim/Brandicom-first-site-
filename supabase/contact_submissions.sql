@@ -16,7 +16,7 @@ create table if not exists public.contact_submissions (
 alter table public.contact_submissions enable row level security;
 
 revoke all on table public.contact_submissions from anon, authenticated;
-grant insert, select on table public.contact_submissions to service_role;
+grant insert, select, delete on table public.contact_submissions to service_role;
 
 -- If the table already exists without phone, run once:
 -- alter table public.contact_submissions add column if not exists phone text not null default '';
