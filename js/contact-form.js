@@ -44,6 +44,7 @@
     var payload = {
       name: ((document.getElementById("name") || {}).value || "").trim(),
       email: ((document.getElementById("mail") || {}).value || "").trim(),
+      phone: ((document.getElementById("phone") || {}).value || "").trim(),
       budget: ((document.getElementById("social-budgeyt") || {}).value || "").trim(),
       message: ((document.getElementById("field") || {}).value || "").trim(),
       services: services,
@@ -54,6 +55,8 @@
     if (payload.name.length < 2) validationError = "Enter your name.";
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(payload.email)) {
       validationError = "Enter a valid email address.";
+    } else if (payload.phone.replace(/\D/g, "").length < 8) {
+      validationError = "Enter a valid phone number.";
     } else if (!payload.budget) validationError = "Enter your social budget.";
     else if (!payload.services.length) validationError = "Choose at least one service.";
 

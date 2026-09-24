@@ -51,7 +51,13 @@
 
   function renderList(posts) {
     var list = document.querySelector(".blog_collection-list");
-    if (!list || !posts.length) return;
+    var empty = document.getElementById("blog-empty-state");
+    if (!list) return;
+    if (!posts.length) {
+      if (empty) empty.hidden = false;
+      return;
+    }
+    if (empty) empty.hidden = true;
     var html = posts.map(card).join("");
     list.insertAdjacentHTML("afterbegin", html);
   }

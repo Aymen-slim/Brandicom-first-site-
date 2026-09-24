@@ -8,6 +8,7 @@ function clean(value, max) {
 function parseBody(body) {
   const name = clean(body && body.name, 120);
   const email = clean(body && body.email, 254).toLowerCase();
+  const phone = clean(body && body.phone, 30);
   const budget = clean(body && body.budget, 80);
   const message = clean(body && body.message, 5000);
   const rawServices = Array.isArray(body && body.services) ? body.services : [];
@@ -18,10 +19,11 @@ function parseBody(body) {
   }
   if (name.length < 2) return { error: "Enter your name." };
   if (!EMAIL_RE.test(email)) return { error: "Enter a valid email address." };
+  if (phone.replace(/\D/g, "").length < 8) return { error: "Enter a valid phone number." };
   if (budget.length < 1) return { error: "Enter your social budget." };
   if (!services.length) return { error: "Choose at least one service." };
 
-  return { row: { name, email, budget, services, message } };
+  return { row: { name, email, phone, budget, services, message } };
 }
 
 module.exports = async function handler(req, res) {
