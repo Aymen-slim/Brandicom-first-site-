@@ -113,7 +113,15 @@ function resolveStaticPath(urlPath) {
 }
 
 function serveStatic(req, res) {
-  const filePath = resolveStaticPath(new URL(req.url, "http://localhost").pathname);
+  const requestUrl = new URL(req.url, "http://localhost");
+  if (requestUrl.pathname.endsWith("/index.html") || requestUrl.pathname === "/index.html") {
+    const clean = requestUrl.pathname.replace(/index\.html$/, "") || "/";
+    res.writeHead(301, { Location: clean + requestUrl.search });
+    res.end();
+    return;
+  }
+
+  const filePath = resolveStaticPath(requestUrl.pathname);
   if (!filePath) {
     res.writeHead(403);
     res.end("Forbidden");

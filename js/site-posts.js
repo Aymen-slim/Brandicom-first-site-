@@ -32,7 +32,7 @@
   }
 
   function card(post) {
-    var href = "../post/index.html?slug=" + encodeURIComponent(post.slug);
+    var href = "../post/?slug=" + encodeURIComponent(post.slug);
     return (
       '<div role="listitem" class="blog_collection-item w-dyn-item" data-live-post="true">' +
         '<div class="blog_collection-link"><div class="blog_collection-wrap">' +
