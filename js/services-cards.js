@@ -10,10 +10,14 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    overlay.style.height = "auto";
-    const needed = overlay.scrollHeight;
-    overlay.style.height = "";
-    card.style.minHeight = needed + "px";
+    const styles = getComputedStyle(overlay);
+    const padding = parseFloat(styles.paddingTop) + parseFloat(styles.paddingBottom);
+    const children = Array.from(overlay.children);
+    const content = children.reduce(function (sum, child) {
+      return sum + child.scrollHeight;
+    }, 0);
+    const gap = 20 * Math.max(children.length - 1, 0);
+    card.style.minHeight = Math.ceil(padding + content + gap) + "px";
   }
 
   function setOpen(card, open) {
