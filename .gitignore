@@ -13,3 +13,5 @@ scratch/
 .env
 .env.*
 tems image/
+bts/
+IMG_*
