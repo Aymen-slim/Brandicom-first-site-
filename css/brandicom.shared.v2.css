@@ -9546,11 +9546,15 @@ html.w-mod-js:not(.w-mod-ix3) :is(.studies_collection-link, .studies_collection-
   position: relative;
 }
 
-.section-hero .hero_main-wraaper,
+.section-hero .hero_main-wraaper {
+  position: relative;
+  z-index: 2;
+}
+
 .hero_navbar-wrap,
 .hero_navbar-wrap .navbar {
   position: relative;
-  z-index: 2;
+  z-index: 30;
 }
 
 .hero_navbar-wrap .navbar {
@@ -9904,6 +9908,20 @@ html.w-mod-js:not(.w-mod-ix3) :is(.studies_collection-link, .studies_collection-
   position: relative;
   overflow: hidden;
   flex-shrink: 0;
+}
+
+.detail_feedback-video-wrap.is-portrait {
+  aspect-ratio: 3 / 4;
+  max-width: 340px;
+  min-height: 0;
+}
+
+.detail_feedback-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+  display: block;
 }
 
 .detail_feedback-video-wrap .w-backgroundvideo-backgroundvideoplaypausebutton.play-button {
