@@ -1,0 +1,266 @@
+.studio-main {
+  width: min(1120px, calc(100% - 40px));
+  margin: 36px auto 72px;
+  color: #0a0a0a;
+  font-family: Manrope, sans-serif;
+}
+
+.studio-kicker {
+  margin: 0;
+  color: #0066ff;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.studio-title {
+  margin: 8px 0 12px;
+  font-family: "Plus Jakarta Sans", Manrope, sans-serif;
+  font-size: clamp(36px, 5vw, 56px);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+
+.studio-lead {
+  max-width: 680px;
+  margin: 0;
+  color: #404040;
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.studio-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(280px, 0.92fr);
+  gap: 24px;
+  margin-top: 28px;
+  align-items: start;
+}
+
+.studio-card {
+  background: #fff;
+  border: 1px solid #e6e6e6;
+  border-radius: 24px;
+  padding: 22px;
+}
+
+.studio-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.studio-label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: #0a0a0a;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.studio-label span {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.studio-hint {
+  color: #737373;
+  font-weight: 500;
+}
+
+.studio-input,
+.studio-select,
+.studio-textarea {
+  width: 100%;
+  border: 1px solid #e5e5e5;
+  border-radius: 16px;
+  background: #f6f6f6;
+  color: #0a0a0a;
+  font: inherit;
+  font-weight: 500;
+  padding: 14px 16px;
+}
+
+.studio-textarea {
+  min-height: 140px;
+  resize: vertical;
+  border-radius: 20px;
+}
+
+.studio-input:focus,
+.studio-select:focus,
+.studio-textarea:focus {
+  outline: 2px solid #0066ff;
+  border-color: transparent;
+  background: #fff;
+}
+
+.studio-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.studio-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: #f6f6f6;
+}
+
+.studio-toggle input {
+  width: 18px;
+  height: 18px;
+  accent-color: #0066ff;
+}
+
+.studio-estimate {
+  margin: 0;
+  color: #00388f;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.studio-note {
+  margin: 0;
+  color: #737373;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.studio-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.studio-submit,
+.studio-cancel {
+  border: 0;
+  border-radius: 999px;
+  padding: 14px 20px;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.studio-submit {
+  background: #0066ff;
+  color: #fff;
+}
+
+.studio-submit:disabled,
+.studio-cancel:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+
+.studio-cancel {
+  background: #fff;
+  color: #0a0a0a;
+  border: 1px solid #d4d4d4;
+}
+
+.studio-status {
+  min-height: 1.4em;
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.studio-status[data-kind="error"] {
+  color: #b42318;
+}
+
+.studio-status[data-kind="success"] {
+  color: #067647;
+}
+
+.studio-status[data-kind="pending"] {
+  color: #0047b3;
+}
+
+.studio-stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 20px;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(0, 102, 255, 0.35), transparent 42%),
+    #0a0a0a;
+}
+
+.studio-stage video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: #000;
+}
+
+.studio-empty {
+  max-width: 260px;
+  margin: 0;
+  padding: 0 20px;
+  color: #fff;
+  text-align: center;
+  font-size: 15px;
+  line-height: 1.45;
+}
+
+.studio-download {
+  display: inline-flex;
+  margin-top: 14px;
+  color: #0066ff;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.studio-download[hidden],
+.studio-cancel[hidden],
+.studio-stage video[hidden],
+.studio-empty[hidden] {
+  display: none;
+}
+
+.studio-nav-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 12px 18px;
+  border-radius: 999px;
+  background: #fff;
+  color: #0a0a0a;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.studio-setup {
+  margin-top: 18px;
+  color: #525252;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.studio-setup code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 12px;
+}
+
+@media (max-width: 900px) {
+  .studio-grid,
+  .studio-options {
+    grid-template-columns: 1fr;
+  }
+}
