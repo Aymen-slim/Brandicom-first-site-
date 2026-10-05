@@ -8,6 +8,8 @@ reels/**/test_*.mp4
 clients/*
 !clients/about.MP4
 !clients/about-poster.webp
+!clients/about.*.mp4
+!clients/about.*.webp
 *.py
 scratch/
 .env
@@ -15,3 +17,5 @@ scratch/
 tems image/
 bts/
 IMG_*
+node_modules/
+dist/

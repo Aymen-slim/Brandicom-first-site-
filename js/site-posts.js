@@ -25,7 +25,7 @@
   }
 
   function loadPosts() {
-    return fetch("/api/posts", { headers: { Accept: "application/json" } })
+    return fetch("/api/posts?summary=1", { headers: { Accept: "application/json" } })
       .then(function (res) { return res.json(); })
       .then(function (data) { return Array.isArray(data.posts) ? data.posts : []; })
       .catch(function () { return []; });
@@ -37,7 +37,7 @@
       '<div role="listitem" class="blog_collection-item w-dyn-item" data-live-post="true">' +
         '<div class="blog_collection-link"><div class="blog_collection-wrap">' +
           '<a href="' + href + '" class="blog_collection-image-wrap w-inline-block">' +
-            '<img src="' + escapeHtml(post.coverImage) + '" alt="' + escapeHtml(post.title) + '" class="blog_collection-image">' +
+            '<img loading="lazy" decoding="async" src="' + escapeHtml(post.coverImage) + '" alt="' + escapeHtml(post.title) + '" class="blog_collection-image">' +
             '<div class="blog_collection_image_over"><div class="blog_collection_image_text">See Details</div></div>' +
           "</a>" +
           '<div class="blog_data-wrap">' +
@@ -84,12 +84,17 @@
     if (excerpt) excerpt.textContent = post.excerpt;
     if (meta) meta.textContent = post.readMinutes + " min Read  |  " + formatDate(post.publishedAt);
     if (cover && post.coverImage) {
+      cover.loading = "eager";
+      cover.decoding = "async";
+      cover.fetchPriority = "high";
       cover.src = post.coverImage;
       cover.alt = post.title;
       cover.hidden = false;
     }
     body.innerHTML = paragraphs(post.body);
     if (second && secondWrap && post.secondImage) {
+      second.loading = "lazy";
+      second.decoding = "async";
       second.src = post.secondImage;
       second.alt = post.title;
       secondWrap.hidden = false;

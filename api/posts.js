@@ -26,7 +26,11 @@ module.exports = async function handler(req, res) {
   }
 
   const slug = String((req.query && req.query.slug) || "").trim();
-  const base = supabaseUrl.replace(/\/$/, "") + "/rest/v1/site_posts?select=slug,title,excerpt,body,cover_image_url,second_image_url,read_minutes,published_at&published=eq.true&order=published_at.desc";
+  const summary = !slug && req.query && req.query.summary === "1";
+  const columns = summary
+    ? "slug,title,excerpt,cover_image_url,read_minutes,published_at"
+    : "slug,title,excerpt,body,cover_image_url,second_image_url,read_minutes,published_at";
+  const base = supabaseUrl.replace(/\/$/, "") + "/rest/v1/site_posts?select=" + columns + "&published=eq.true&order=published_at.desc";
   const url = slug ? base + "&slug=eq." + encodeURIComponent(slug) : base;
 
   let response;
