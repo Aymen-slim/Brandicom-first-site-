@@ -21,8 +21,15 @@ function mediaManifest() {
     for (const [key, entry] of Object.entries(manifest)) {
       if (!entry.variants) continue;
       const original = path.join(root, key);
+      if (!fs.existsSync(original)) {
+        delete entry.variants;
+        continue;
+      }
       const bytes = fs.statSync(original).size;
-      entry.variants = entry.variants.filter(variant => fs.statSync(path.join(root, variant.src)).size < bytes);
+      entry.variants = entry.variants.filter(variant => {
+        const file = path.join(root, variant.src);
+        return fs.existsSync(file) && fs.statSync(file).size < bytes;
+      });
       if (/\.webp$/i.test(key)) entry.variants.push({ src: key, width: entry.width, height: entry.height });
       entry.variants = entry.variants.sort((a, b) => a.width - b.width).filter((variant, index, list) => !index || variant.width !== list[index - 1].width);
       if (!entry.variants.length) delete entry.variants;

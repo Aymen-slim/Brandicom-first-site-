@@ -46,26 +46,12 @@
   "/videos/bts/bts-1.webp": {
     "sourceHash": "0bcfdb7189e2",
     "width": 480,
-    "height": 854,
-    "variants": [
-      {
-        "src": "/videos/bts/bts-1.webp.5b8318afd6f4.480.webp",
-        "width": 480,
-        "height": 854
-      }
-    ]
+    "height": 854
   },
   "/videos/bts/bts-3.webp": {
     "sourceHash": "6f9ce7df96d5",
     "width": 480,
-    "height": 854,
-    "variants": [
-      {
-        "src": "/videos/bts/bts-3.webp.6bf779fa3c99.480.webp",
-        "width": 480,
-        "height": 854
-      }
-    ]
+    "height": 854
   },
   "/videos/bts/bts-3.mp4": {
     "sourceHash": "5491ad94d900",
