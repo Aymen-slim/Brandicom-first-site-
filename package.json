@@ -3,7 +3,6 @@
   "private": true,
   "scripts": {
     "dev": "node scripts/dev-server.js",
-    "start": "node scripts/dev-server.js",
-    "test": "node scripts/test-seedance.js"
+    "start": "node scripts/dev-server.js"
   }
 }

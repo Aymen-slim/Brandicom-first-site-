@@ -7,7 +7,6 @@ const ROOT = path.join(__dirname, "..");
 const PORT = Number(process.env.PORT) || 8765;
 const contactHandler = require("../api/contact");
 const postsHandler = require("../api/posts");
-const seedanceHandler = require("../api/seedance");
 
 const MIME = {
   ".html": "text/html; charset=utf-8",
@@ -83,31 +82,6 @@ function createVercelResponse(nodeRes) {
       nodeRes.end(JSON.stringify(payload));
     },
   };
-}
-
-async function handleSeedance(req, res) {
-  let body = {};
-  if (req.method !== "GET" && req.method !== "HEAD") {
-    try {
-      const raw = await readBody(req);
-      body = raw ? JSON.parse(raw) : {};
-    } catch (error) {
-      res.writeHead(400, { "Content-Type": "application/json; charset=utf-8" });
-      res.end(JSON.stringify({ error: "Invalid JSON body." }));
-      return;
-    }
-  }
-
-  const requestUrl = new URL(req.url, "http://localhost");
-  const query = {};
-  requestUrl.searchParams.forEach(function (value, key) {
-    query[key] = value;
-  });
-
-  await seedanceHandler(
-    { method: req.method, body: body, query: query, headers: req.headers },
-    createVercelResponse(res)
-  );
 }
 
 async function handleContact(req, res) {
@@ -199,17 +173,6 @@ const server = http.createServer(function (req, res) {
     return;
   }
 
-  if (pathname === "/api/seedance") {
-    handleSeedance(req, res).catch(function (error) {
-      console.error("Seedance API failed:", error);
-      if (!res.headersSent) {
-        res.writeHead(500, { "Content-Type": "application/json; charset=utf-8" });
-        res.end(JSON.stringify({ error: "Unable to generate video." }));
-      }
-    });
-    return;
-  }
-
   serveStatic(req, res);
 });
 
@@ -225,11 +188,7 @@ server.on("error", function (error) {
 server.listen(PORT, function () {
   console.log("Brandicom dev server running at http://localhost:" + PORT);
   console.log("Contact page: http://localhost:" + PORT + "/contact/");
-  console.log("Seedance studio: http://localhost:" + PORT + "/studio/");
   if (!process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
     console.warn("Warning: SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY is missing (.env).");
-  }
-  if (!(process.env.HF_KEY || process.env.HF_CREDENTIALS) || !process.env.SEEDANCE_ACCESS_KEY) {
-    console.warn("Warning: HF_KEY (or HF_CREDENTIALS) or SEEDANCE_ACCESS_KEY is missing (.env).");
   }
 });
