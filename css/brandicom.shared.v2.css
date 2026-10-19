@@ -10212,6 +10212,19 @@ html.w-mod-js:not(.w-mod-ix3) :is(.studies_collection-link, .studies_collection-
   font-size: 13px;
 }
 
+.footer_bottom-left a,
+.footer_copyright-text a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.2s ease;
+}
+
+.footer_bottom-left a:hover,
+.footer_copyright-text a:hover {
+  color: var(--_color---primary-color-pallets--400);
+}
+
 .footer_bottom-right {
   align-items: center;
   grid-column-gap: 12px;
