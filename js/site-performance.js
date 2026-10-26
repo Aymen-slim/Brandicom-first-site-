@@ -134,8 +134,8 @@
   function manageVideo(video) {
     if (video.closest(".cucina-reels-stage") || video.__performanceManaged) return;
     var wrapper = video.closest(".w-background-video");
-    var autoplay = video.hasAttribute("autoplay") || video.dataset.performanceAutoplay === "true" || wrapper && wrapper.dataset.autoplay === "true";
-    if (!autoplay) return;
+    var shouldManage = video.closest(".section_bts") || video.hasAttribute("autoplay") || video.dataset.performanceAutoplay === "true" || wrapper && wrapper.dataset.autoplay === "true";
+    if (!shouldManage) return;
     video.__performanceManaged = true;
     trackedVideos.add(video);
     video.muted = true;
