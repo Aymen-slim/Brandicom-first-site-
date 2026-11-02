@@ -97,7 +97,7 @@ test("explicit pauses are respected until the user plays the video again", async
 test("all public pages share a media controller and deferred dependency order", () => {
   const { optimizeHtml, htmlFiles } = optimizer();
   const files = htmlFiles(root);
-  assert.equal(files.length, 25);
+  assert.equal(files.length, 24);
   for (const file of files) {
     const html = optimizeHtml(fs.readFileSync(file, "utf8"), file);
     assert.match(html, /src="\/js\/site-performance\.js"/);
